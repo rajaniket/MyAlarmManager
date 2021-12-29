@@ -23,6 +23,8 @@
         <receiver android:name=".AlarmReceiver">
         </receiver>
 
+        <service android:name=".BellService"/>
+
         <activity
             android:name=".nativeuse.WakeUpActivity"
             android:parentActivityName=".nativeuse.MainActivity"

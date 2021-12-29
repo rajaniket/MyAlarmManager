@@ -7,6 +7,7 @@ import android.text.TextUtils
 import android.text.format.DateFormat
 import com.google.gson.Gson
 import java.util.*
+import android.os.Build
 
 class AlarmReceiver : BroadcastReceiver() {
 
@@ -19,7 +20,14 @@ class AlarmReceiver : BroadcastReceiver() {
         if (TextUtils.isEmpty(nextAlarmData)) return
 
         val alarmDataModel = Gson().fromJson(nextAlarmData,AlarmDataModel::class.java)
-        context.showNotificationWithFullScreenIntent(title = alarmDataModel.title, description = alarmDataModel.desc)
+
+        val intent2 = Intent(context.applicationContext, BellService::class.java)
+        intent2.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        if (Build.VERSION.SDK_INT >= 26) {
+            context.applicationContext!!.startForegroundService(intent2)
+        } else {
+            context.applicationContext.startService(intent2)
+        }
 
         // first check for repeated time
         if (!alarmDataModel.listOfTimeInSec.isNullOrEmpty()){
@@ -64,4 +72,6 @@ class AlarmReceiver : BroadcastReceiver() {
 
 
     }
+
+
 }

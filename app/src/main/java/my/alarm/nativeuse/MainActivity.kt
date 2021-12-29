@@ -7,7 +7,6 @@ import my.alarm.MyAlarmListener
 import my.alarm.MyAlarmManager
 import my.alarm.R
 
-
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,7 +20,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun listOfTimesInSec(): ArrayList<Long> {
-                return arrayListOf(2 * 60 * 60, 16 * 60 * 60, ((19 * 60) + 40) * 60)
+                return arrayListOf(2 * 60 * 60, 16 * 60 * 60, ((20 * 60) + 44) * 60)
             }
 
             override fun startDate(): String? = null
