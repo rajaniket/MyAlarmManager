@@ -51,7 +51,7 @@ class AlarmUtils {
             val timeInMillis1 = System.currentTimeMillis() + 10000
             Log.e("data","time : $timeInMillis1")
 
-            val broadcast = PendingIntent.getBroadcast(context, 1, intent, 0)
+            val broadcast = PendingIntent.getBroadcast(context, id, intent, 0)
             val broadcast2 = PendingIntent.getBroadcast(context, 0, Intent(context, WakeUpActivity::class.java), 0)
 
             with(alarmManager) {

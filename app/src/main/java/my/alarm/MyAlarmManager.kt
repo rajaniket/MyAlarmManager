@@ -6,6 +6,10 @@ import android.widget.Toast
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
+import android.app.AlarmManager
+import android.app.PendingIntent
+import android.content.Intent
+
 
 class MyAlarmManager {
 
@@ -35,6 +39,14 @@ class MyAlarmManager {
                 AlarmUtils.setAlarm(now,listener.listOfTimesInSec(),context,listener.getId(),listener.listOfDays(),listener.getTitle(),listener.getDescription())
 
             }
+        }
+
+        fun cancelAlarm(context: Context, id : Int){
+            val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+            val intent = Intent(context, AlarmReceiver::class.java)
+            intent.addFlags(Intent.FLAG_RECEIVER_FOREGROUND);
+            val pendingIntent = PendingIntent.getBroadcast(context, id, intent, 0)
+            alarmManager.cancel(pendingIntent)
         }
 
     }
