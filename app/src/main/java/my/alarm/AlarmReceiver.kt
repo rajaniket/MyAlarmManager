@@ -22,6 +22,9 @@ class AlarmReceiver : BroadcastReceiver() {
         val alarmDataModel = Gson().fromJson(nextAlarmData,AlarmDataModel::class.java)
 
         val intent2 = Intent(context.applicationContext, BellService::class.java)
+        intent2.putExtra("id","" + id)
+        intent2.putExtra("title","" + alarmDataModel.title)
+        intent2.putExtra("desc","" + alarmDataModel.desc)
         intent2.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         if (Build.VERSION.SDK_INT >= 26) {
             context.applicationContext!!.startForegroundService(intent2)

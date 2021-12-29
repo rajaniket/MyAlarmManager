@@ -2,11 +2,15 @@ package my.alarm.nativeuse
 
 import android.app.KeyguardManager
 import android.content.Context
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
+import my.alarm.BellService
 import my.alarm.R
+import my.alarm.cancelNotification
 
 class WakeUpActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,7 +41,11 @@ class WakeUpActivity : AppCompatActivity() {
             }
         }
 
+        val id = intent.getStringExtra("id")
+        Log.e("data", "act Id : $id")
+        id?.let { cancelNotification(this,id.toInt()) }
         setContentView(R.layout.activity_wake_up)
+        stopService(Intent(this,BellService::class.java))
 
     }
 }

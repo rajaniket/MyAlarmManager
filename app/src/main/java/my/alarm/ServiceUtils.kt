@@ -24,9 +24,9 @@ fun showNotificationWithFullScreenIntent(
         .setSmallIcon(android.R.drawable.arrow_up_float)
         .setContentTitle(title)
         .setContentText(description)
-        .setPriority(NotificationCompat.PRIORITY_MAX)
+        .setPriority(NotificationCompat.PRIORITY_DEFAULT)
         .setDefaults(Notification.DEFAULT_ALL)
-        .setCategory(NotificationCompat.CATEGORY_ALARM)
+//        .setCategory(NotificationCompat.CATEGORY_ALARM)
         .setFullScreenIntent(getFullScreenIntent(context), true)
 
     val DEFAULT_VIBRATE_PATTERN = longArrayOf(0, 250, 250, 250)
@@ -47,7 +47,7 @@ private fun NotificationManager.buildChannel() {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
         val name = "Example Notification Channel"
         val descriptionText = "This is used to demonstrate the Full Screen Intent"
-        val importance = NotificationManager.IMPORTANCE_MAX
+        val importance = NotificationManager.IMPORTANCE_DEFAULT
         val channel = NotificationChannel(CHANNEL_ID, name, importance).apply {
             description = descriptionText
             enableLights(true);
@@ -66,4 +66,10 @@ private fun getFullScreenIntent(context: Context): PendingIntent {
 
     // flags and request code are 0 for the purpose of demonstration
     return PendingIntent.getActivity(context, 0, intent, 0)
+}
+
+fun cancelNotification(ctx: Context, notifyId: Int) {
+    val ns = Context.NOTIFICATION_SERVICE
+    val nMgr = ctx.getSystemService(ns) as NotificationManager
+    nMgr.cancel(notifyId)
 }

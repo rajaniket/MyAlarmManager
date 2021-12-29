@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun listOfTimesInSec(): ArrayList<Long> {
-                return arrayListOf(2 * 60 * 60, 16 * 60 * 60, ((20 * 60) + 44) * 60)
+                return arrayListOf(2 * 60 * 60, 16 * 60 * 60, ((21 * 60) + 13) * 60)
             }
 
             override fun startDate(): String? = null
